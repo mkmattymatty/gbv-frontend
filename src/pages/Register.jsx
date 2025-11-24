@@ -1,8 +1,8 @@
 // frontend/src/pages/Register.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import SafetyBanner from '../components/SafetyBanner';
+import api from '../services/api'; // <-- IMPORTANT: call backend directly
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,9 +12,10 @@ const Register = () => {
     confirmPassword: '',
     emergencyContact: { name: '', phone: '' }
   });
+
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,6 +34,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -47,13 +49,19 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await register({
+      // ✅ Direct POST to backend (no auto-login)
+      await api.post('/auth/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
         emergencyContact: formData.emergencyContact
       });
-      navigate('/dashboard');
+
+      setSuccess('Account created successfully! Redirecting to login...');
+
+      // ⏳ Wait 1.5 sec then redirect
+      setTimeout(() => navigate('/login'), 1500);
+
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.');
     } finally {
@@ -64,13 +72,19 @@ const Register = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <SafetyBanner />
-      
+
       <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">Create Account</h2>
-        
+
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {success}
           </div>
         )}
 
@@ -85,7 +99,7 @@ const Register = () => {
               value={formData.username}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
             />
           </div>
 
@@ -99,7 +113,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
             />
           </div>
 
@@ -114,7 +128,7 @@ const Register = () => {
               onChange={handleChange}
               required
               minLength="8"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
             />
           </div>
 
@@ -128,7 +142,7 @@ const Register = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
             />
           </div>
 
@@ -136,28 +150,24 @@ const Register = () => {
             <h3 className="text-lg font-semibold text-gray-700 mb-3">
               Emergency Contact (Optional)
             </h3>
-            
-            <div className="mb-3">
-              <label className="block text-gray-700 mb-2">Name</label>
-              <input
-                type="text"
-                name="emergency.name"
-                value={formData.emergencyContact.name}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2">Phone</label>
-              <input
-                type="tel"
-                name="emergency.phone"
-                value={formData.emergencyContact.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
+            <label className="block text-gray-700 mb-2">Name</label>
+            <input
+              type="text"
+              name="emergency.name"
+              value={formData.emergencyContact.name}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
+            />
+
+            <label className="block text-gray-700 mb-2 mt-3">Phone</label>
+            <input
+              type="tel"
+              name="emergency.phone"
+              value={formData.emergencyContact.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500"
+            />
           </div>
 
           <button
