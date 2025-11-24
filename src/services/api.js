@@ -1,4 +1,3 @@
-// frontend/src/services/api.js
 import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'https://gbv-backend-8gck.onrender.com/api';
