@@ -95,7 +95,7 @@ Leave comments in the chat interface if logged in; guests can read messages but 
 
 
 Folder Structure
-gbv-support-app/
+          gbv-support-app/
 ├─ backend/
 │  ├─ src/
 │  │  ├─ routes/
