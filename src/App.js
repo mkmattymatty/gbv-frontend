@@ -41,8 +41,9 @@ const AppWithAuth = () => {
         <Route path="/journal" element={<ProtectedRoute><Journal /></ProtectedRoute>} />
       </Routes>
 
-      {/* Show chat icon only when logged in */}
-      {user && <ChatIcon />}
+     {/* Chat icon visible for everyone */}
+    <ChatIcon />
+
     </div>
   );
 };
