@@ -118,7 +118,6 @@ gbv-support-app/
 
 Notes
 
-
 Comments Safety: Comments are stored securely in MongoDB but live chat is disabled to prevent sharing sensitive information.
 
 Environment Variables: Make sure REACT_APP_API_URL points to your deployed backend.
