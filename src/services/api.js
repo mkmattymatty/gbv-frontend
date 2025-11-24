@@ -1,11 +1,13 @@
 // frontend/src/services/api.js
 import axios from 'axios';
 
+const API_BASE = process.env.REACT_APP_API_URL || 'https://gbv-backend-8gck.onrender.com/api';
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: API_BASE,
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 // Add token to requests if available
@@ -20,7 +22,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Handle response errors
+// Handle response errors globally
 api.interceptors.response.use(
   (response) => response,
   (error) => {
