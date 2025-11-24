@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+https://gbv-frontend.vercel.app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GBV Support App
+A web application to provide support, resources, and safety planning tools for survivors of gender-based violence (GBV). Built with MERN stack (MongoDB, Express, React, Node.js) and includes a live support chat interface (Haven AI) with safe comment storage.
 
-## Available Scripts
 
-In the project directory, you can run:
+Features
+User Authentication: Register and login securely with JWT tokens.
 
-### `npm start`
+Safety Plans: Create and manage personal safety plans.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Resources: Access curated GBV support resources.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Community Comments: Leave comments that are securely stored in the database.
 
-### `npm test`
+Haven AI Chat: AI-powered guidance interface (read-only for safety; comments saved securely).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Journal: Personal private journaling for logged-in users.
 
-### `npm run build`
+Responsive Design: Works across desktop and mobile devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Tech Stack
+Frontend: React, React Router, Tailwind CSS, Framer Motion, Axios
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Backend: Node.js, Express, MongoDB, Mongoose, Socket.IO
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Authentication: JWT
 
-### `npm run eject`
+Deployment:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Frontend: Vercel
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Backend: Render
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Other: Lucide React icons, environment variables via .env
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Installation
+Backend
+Clone the repository:
+bash
 
-## Learn More
+git clone https://github.com/mkmattymatty/gbv-backend.git
+cd gbv-backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install dependencies:
+bash
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a .env file with the following variables:
+env
+PORT=5000
+MONGODB_URI=<your-mongodb-uri>
+JWT_SECRET=<your-jwt-secret>
+FRONTEND_URL=<your-frontend-url>
+NODE_ENV=production
+OPENAI_API_KEY=<your-openai-key> # optional if using AI features
 
-### Code Splitting
+Run the backend locally:
+bash
+Run the backend locally:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Frontend
+Clone the repository:
+bash
+git clone https://github.com/mkmattymatty/gbv-frontend.git
+cd gbv-frontend
 
-### Making a Progressive Web App
+Install dependencies:
+bash
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Create a .env file:
+bash
+REACT_APP_API_URL=<your-backend-url>/api
 
-### Advanced Configuration
+Start the frontend:
+bash
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+Deployment
+Frontend: Deploy via Vercel
+Backend: Deploy via Render
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Usage
+Visit the landing page and register for a new account.
 
-### `npm run build` fails to minify
+Login to access your dashboard, resources, safety planning, and journal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open the Haven AI chat via the floating icon for guidance.
+
+Leave comments in the chat interface if logged in; guests can read messages but cannot send.
+
+
+Folder Structure
+gbv-support-app/
+├─ backend/
+│  ├─ src/
+│  │  ├─ routes/
+│  │  ├─ models/
+│  │  ├─ config/
+│  │  └─ server.js
+│  ├─ .env
+│  └─ package.json
+├─ frontend/
+│  ├─ src/
+│  │  ├─ components/
+│  │  ├─ context/
+│  │  ├─ pages/
+│  │  ├─ services/
+│  │  └─ App.jsx
+│  ├─ .env
+│  └─ package.json
+└─ README.md
+
+
+Notes
+
+
+Comments Safety: Comments are stored securely in MongoDB but live chat is disabled to prevent sharing sensitive information.
+
+Environment Variables: Make sure REACT_APP_API_URL points to your deployed backend.
+
+Socket.IO: Used for potential chat features; currently the AI chat is static with typing animation.
+
+
+Author
+Mathias Mwaro
+Full-Stack Developer | MERN Stack
+
+License
+This project is licensed under the MIT License.
