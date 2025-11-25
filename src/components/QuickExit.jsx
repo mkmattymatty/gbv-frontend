@@ -20,7 +20,7 @@ const QuickExit = () => {
   return (
     <button
       onClick={handleQuickExit}
-      className="fixed bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg z-50 font-semibold"
+      className="fixed bottom-4 left-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg z-50 font-semibold"
       title="Press ESC or click to quickly exit (redirects to Google)"
     >
       Quick Exit (ESC)
