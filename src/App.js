@@ -16,7 +16,8 @@ import SafetyPlanning from './pages/SafetyPlanning';
 import Resources from './pages/Resources';
 import EmergencyContacts from './pages/EmergencyContacts';
 import Journal from './pages/Journal';
-import ChatIcon from './components/ChatIcon';   // <-- ADDED
+import ChatIcon from './components/ChatIcon';
+import GBVHistory from './components/GBVHistory'; // <-- NEW IMPORT
 import './index.css';
 
 // Small wrapper to access auth inside App
@@ -39,11 +40,13 @@ const AppWithAuth = () => {
         <Route path="/resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
         <Route path="/emergency" element={<EmergencyContacts />} />
         <Route path="/journal" element={<ProtectedRoute><Journal /></ProtectedRoute>} />
+        
+        {/* GBV History Page */}
+        <Route path="/history" element={<GBVHistory />} />
       </Routes>
 
-     {/* Chat icon visible for everyone */}
-    <ChatIcon />
-
+      {/* Chat icon visible for everyone */}
+      <ChatIcon />
     </div>
   );
 };
