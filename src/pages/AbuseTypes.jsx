@@ -100,13 +100,13 @@ const AbuseTypes = () => {
             onClick={() => navigate('/dashboard')}
             className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg font-semibold"
           >
-            ← Back to Dashboard
+            ← Back to Safety Planning
           </button>
           <button
             onClick={() => navigate('/safety-planning')}
             className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold"
           >
-            Next: Safety Planning →
+            Next: Resources →
           </button>
         </div>
       </div>
