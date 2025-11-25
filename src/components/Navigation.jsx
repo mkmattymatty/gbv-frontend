@@ -24,11 +24,12 @@ const Navigation = () => {
           <div className="flex gap-4 items-center">
             {user ? (
               <>
-                {/* ONLY Dashboard stays */}
                 <Link to="/dashboard" className="hover:text-purple-200">
                   Dashboard
                 </Link>
-
+                <Link to="/history" className="hover:text-purple-200">
+                  GBV History
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="bg-purple-900 hover:bg-purple-800 px-4 py-2 rounded"
@@ -44,6 +45,9 @@ const Navigation = () => {
                   className="bg-purple-900 hover:bg-purple-800 px-4 py-2 rounded"
                 >
                   Get Started
+                </Link>
+                <Link to="/history" className="hover:text-purple-200">
+                  GBV History
                 </Link>
               </>
             )}
