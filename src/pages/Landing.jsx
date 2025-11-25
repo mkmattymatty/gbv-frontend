@@ -16,7 +16,7 @@ const Landing = () => {
       <div className="container mx-auto px-4 py-4 flex items-center mb-6">
         <ThemeToggle />
         <h1 className="text-3xl font-bold ml-2 text-gray-800 dark:text-gray-100">
-          Safe Haven
+          2koSafe Haven
         </h1>
       </div>
 
@@ -35,7 +35,7 @@ const Landing = () => {
           </motion.h1>
 
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Safe Haven provides support, resources, and safety planning for survivors of gender-based violence
+            2koSafe Haven provides support, resources, and safety planning for survivors of gender-based violence
           </p>
 
           <div className="flex gap-4 justify-center">
