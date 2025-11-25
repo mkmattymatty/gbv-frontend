@@ -26,7 +26,7 @@ const SupportCommunity = () => {
 
   useEffect(() => {
     fetchComments();
-    const iv = setInterval(fetchComments, 15000);
+    const iv = setInterval(fetchComments, 15000); // refresh every 15s
     return () => clearInterval(iv);
   }, [fetchComments]);
 
@@ -34,7 +34,7 @@ const SupportCommunity = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ Updated handleSend to include username
+  // Send a new comment
   const handleSend = async () => {
     setError("");
     const trimmed = comment.trim();
@@ -52,7 +52,7 @@ const SupportCommunity = () => {
 
       const payload = {
         text: trimmed,
-        username: user?.username || user?.email || "Anonymous", // send logged-in username
+        username: user?.username || user?.email || "Anonymous",
       };
 
       const res = await api.post("/comments", payload);
@@ -86,7 +86,9 @@ const SupportCommunity = () => {
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Comments column */}
         <div className="md:col-span-2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow h-auto">
+          {/* Comment input */}
           <div className="mb-3">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Leave a comment
@@ -95,6 +97,12 @@ const SupportCommunity = () => {
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               rows={4}
               placeholder={user ? "Share something..." : "Please login to comment."}
               disabled={!user}
@@ -121,6 +129,7 @@ const SupportCommunity = () => {
 
           <hr className="my-4 border-gray-200 dark:border-gray-700" />
 
+          {/* Comments display */}
           <div className="space-y-3 overflow-y-auto max-h-96 p-1">
             {comments.length === 0 && (
               <div className="text-sm text-gray-500">No comments yet — be the first.</div>
@@ -132,7 +141,11 @@ const SupportCommunity = () => {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.18 }}
-                className="p-3 bg-gray-50 dark:bg-gray-700 rounded"
+                className={`p-3 rounded ${
+                  c.username === user?.username
+                    ? "bg-purple-100 dark:bg-purple-800"
+                    : "bg-gray-50 dark:bg-gray-700"
+                }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="text-sm font-semibold text-purple-700 dark:text-purple-300">
@@ -152,6 +165,7 @@ const SupportCommunity = () => {
           </div>
         </div>
 
+        {/* Contact column */}
         <div>
           <ContactSection />
         </div>
