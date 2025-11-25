@@ -18,7 +18,7 @@ const Navigation = () => {
       <nav className="bg-purple-700 text-white shadow-lg">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold">
-            Safe Haven
+            2koSafe Haven
           </Link>
 
           <div className="flex gap-4 items-center">
