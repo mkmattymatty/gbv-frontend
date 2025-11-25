@@ -13,7 +13,7 @@ const SupportCommunity = () => {
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // ✅ wrap fetchComments in useCallback to satisfy useEffect deps
+  // Fetch comments from backend
   const fetchComments = useCallback(async () => {
     try {
       const res = await api.get("/comments");
@@ -26,15 +26,15 @@ const SupportCommunity = () => {
 
   useEffect(() => {
     fetchComments();
-    // Optional: refresh every 15 seconds
     const iv = setInterval(fetchComments, 15000);
     return () => clearInterval(iv);
-  }, [fetchComments]); // ✅ useCallback fixes the ESLint warning
+  }, [fetchComments]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // ✅ Updated handleSend to include username
   const handleSend = async () => {
     setError("");
     const trimmed = comment.trim();
@@ -42,14 +42,20 @@ const SupportCommunity = () => {
       setError("Comment must be at least 3 characters.");
       return;
     }
-    if (trimmed.length > 2000) {
-      setError("Comment too long (max 2000).");
+    if (trimmed.length > 5000) {
+      setError("Comment too long (max 5000).");
       return;
     }
 
     try {
       setSending(true);
-      const res = await api.post("/comments", { text: trimmed });
+
+      const payload = {
+        text: trimmed,
+        username: user?.username || user?.email || "Anonymous", // send logged-in username
+      };
+
+      const res = await api.post("/comments", payload);
       setComments((prev) => [...prev, res.data]);
       setComment("");
       scrollToBottom();
@@ -79,9 +85,7 @@ const SupportCommunity = () => {
         Share your experiences or thoughts. Comments are saved securely to our database.
       </motion.p>
 
-      {/* Page content grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Comments column */}
         <div className="md:col-span-2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow h-auto">
           <div className="mb-3">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -148,7 +152,6 @@ const SupportCommunity = () => {
           </div>
         </div>
 
-        {/* Contact column */}
         <div>
           <ContactSection />
         </div>
