@@ -26,10 +26,15 @@ const Navigation = () => {
               <>
                 <Link to="/dashboard" className="hover:text-purple-200">Dashboard</Link>
                 <Link to="/abuse-types" className="hover:text-purple-200">Learn</Link>
-                <Link to="/safety-planning" className="hover:text-purple-200">Safety Plan</Link>
-                <Link to="/resources" className="hover:text-purple-200">Resources</Link>
+                {/* REMOVED SAFETY PLAN */}
+                {/* <Link to="/safety-planning" className="hover:text-purple-200">Safety Plan</Link> */}
+
+                {/* REMOVED RESOURCES */}
+                {/* <Link to="/resources" className="hover:text-purple-200">Resources</Link> */}
+
                 <Link to="/emergency" className="hover:text-purple-200">Emergency</Link>
                 <Link to="/support-community" className="hover:text-purple-200 font-semibold">Support Community</Link>
+
                 <button
                   onClick={handleLogout}
                   className="bg-purple-900 hover:bg-purple-800 px-4 py-2 rounded"
