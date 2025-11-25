@@ -11,9 +11,10 @@ const SupportCommunity = () => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editingText, setEditingText] = useState("");
   const messagesEndRef = useRef(null);
 
-  // Fetch comments from backend
   const fetchComments = useCallback(async () => {
     try {
       const res = await api.get("/comments");
@@ -26,7 +27,7 @@ const SupportCommunity = () => {
 
   useEffect(() => {
     fetchComments();
-    const iv = setInterval(fetchComments, 15000); // refresh every 15s
+    const iv = setInterval(fetchComments, 15000);
     return () => clearInterval(iv);
   }, [fetchComments]);
 
@@ -34,7 +35,6 @@ const SupportCommunity = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Send a new comment
   const handleSend = async () => {
     setError("");
     const trimmed = comment.trim();
@@ -49,12 +49,7 @@ const SupportCommunity = () => {
 
     try {
       setSending(true);
-
-      const payload = {
-        text: trimmed,
-        username: user?.username || user?.email || "Anonymous",
-      };
-
+      const payload = { text: trimmed, username: user?.username || user?.email || "Anonymous" };
       const res = await api.post("/comments", payload);
       setComments((prev) => [...prev, res.data]);
       setComment("");
@@ -64,6 +59,27 @@ const SupportCommunity = () => {
       setError(err.response?.data?.error || "Failed to send comment.");
     } finally {
       setSending(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/comments/${id}`);
+      setComments((prev) => prev.filter((c) => c._id !== id));
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      if (!editingText.trim()) return;
+      const res = await api.patch(`/comments/${id}`, { text: editingText });
+      setComments((prev) => prev.map((c) => (c._id === id ? res.data : c)));
+      setEditingId(null);
+      setEditingText("");
+    } catch (err) {
+      console.error("Edit failed:", err);
     }
   };
 
@@ -88,7 +104,6 @@ const SupportCommunity = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Comments column */}
         <div className="md:col-span-2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow h-auto">
-          {/* Comment input */}
           <div className="mb-3">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Leave a comment
@@ -151,13 +166,62 @@ const SupportCommunity = () => {
                   <div className="text-sm font-semibold text-purple-700 dark:text-purple-300">
                     {c.username || "Anonymous"}
                   </div>
-                  <div className="text-xs text-gray-400">
-                    {new Date(c.createdAt).toLocaleString()}
+                  <div className="flex items-center gap-2">
+                    <div className="text-xs text-gray-400">
+                      {new Date(c.createdAt).toLocaleString()}
+                    </div>
+
+                    {c.username === user?.username && (
+                      <>
+                        {/* Edit button */}
+                        <button
+                          onClick={() => {
+                            setEditingId(c._id);
+                            setEditingText(c.text);
+                          }}
+                          className="text-blue-600 text-xs hover:underline"
+                        >
+                          Edit
+                        </button>
+
+                        {/* Delete button */}
+                        <button
+                          onClick={() => handleDelete(c._id)}
+                          className="text-red-600 text-xs hover:underline"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
-                <div className="text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
-                  {c.text}
-                </div>
+
+                {editingId === c._id ? (
+                  <div className="flex gap-2 mt-1">
+                    <input
+                      type="text"
+                      value={editingText}
+                      onChange={(e) => setEditingText(e.target.value)}
+                      className="flex-1 p-2 border rounded"
+                    />
+                    <button
+                      onClick={() => handleEdit(c._id)}
+                      className="bg-blue-600 text-white px-2 rounded"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditingId(null)}
+                      className="bg-gray-400 text-white px-2 rounded"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <div className="text-gray-800 dark:text-gray-100 whitespace-pre-wrap mt-1">
+                    {c.text}
+                  </div>
+                )}
               </motion.div>
             ))}
 
@@ -165,7 +229,6 @@ const SupportCommunity = () => {
           </div>
         </div>
 
-        {/* Contact column */}
         <div>
           <ContactSection />
         </div>
