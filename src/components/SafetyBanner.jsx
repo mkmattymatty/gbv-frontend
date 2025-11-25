@@ -13,7 +13,7 @@ const SafetyBanner = () => {
         <div className="ml-3">
           <p className="text-sm text-yellow-700">
             <strong>Safety Reminder:</strong> Your privacy matters. This site doesn't store browsing history. 
-            Use the Quick Exit button (top right) or press ESC to leave quickly.
+            Use the Quick Exit button (bottom right) or press ESC to leave quickly.✍️By MwaroMathias(management)
           </p>
         </div>
       </div>
