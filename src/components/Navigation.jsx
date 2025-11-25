@@ -24,16 +24,10 @@ const Navigation = () => {
           <div className="flex gap-4 items-center">
             {user ? (
               <>
-                <Link to="/dashboard" className="hover:text-purple-200">Dashboard</Link>
-                <Link to="/abuse-types" className="hover:text-purple-200">Learn</Link>
-                {/* REMOVED SAFETY PLAN */}
-                {/* <Link to="/safety-planning" className="hover:text-purple-200">Safety Plan</Link> */}
-
-                {/* REMOVED RESOURCES */}
-                {/* <Link to="/resources" className="hover:text-purple-200">Resources</Link> */}
-
-                <Link to="/emergency" className="hover:text-purple-200">Emergency</Link>
-                <Link to="/support-community" className="hover:text-purple-200 font-semibold">Support Community</Link>
+                {/* ONLY Dashboard stays */}
+                <Link to="/dashboard" className="hover:text-purple-200">
+                  Dashboard
+                </Link>
 
                 <button
                   onClick={handleLogout}
@@ -44,9 +38,11 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                <Link to="/emergency" className="hover:text-purple-200 font-semibold">Emergency</Link>
                 <Link to="/login" className="hover:text-purple-200">Login</Link>
-                <Link to="/register" className="bg-purple-900 hover:bg-purple-800 px-4 py-2 rounded">
+                <Link
+                  to="/register"
+                  className="bg-purple-900 hover:bg-purple-800 px-4 py-2 rounded"
+                >
                   Get Started
                 </Link>
               </>
