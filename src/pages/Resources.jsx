@@ -29,7 +29,7 @@ const Resources = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <SafetyBanner />
-      
+
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Support Resources</h1>
         <p className="text-lg text-gray-600 mb-8">
@@ -98,35 +98,17 @@ const Resources = () => {
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
           <h2 className="text-2xl font-bold text-purple-700 mb-4">Digital Safety Tips</h2>
           <ul className="space-y-3 text-gray-700">
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Use devices your abuser doesn't have access to when seeking help</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Clear your browser history and use incognito/private mode</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Change passwords on accounts your abuser may access</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Check privacy settings on social media</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Be aware of location tracking on your phone and apps</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-purple-600 mr-2">✓</span>
-              <span>Get a new phone number if needed</span>
-            </li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Use devices your abuser doesn't have access to when seeking help</span></li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Clear your browser history and use incognito/private mode</span></li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Change passwords on accounts your abuser may access</span></li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Check privacy settings on social media</span></li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Be aware of location tracking on your phone and apps</span></li>
+            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Get a new phone number if needed</span></li>
           </ul>
         </div>
 
         {/* Financial Resources */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
           <h2 className="text-2xl font-bold text-purple-700 mb-4">Financial Assistance</h2>
           <p className="text-gray-600 mb-4">
             Financial abuse is common. Here are resources to help you gain financial independence:
@@ -139,6 +121,30 @@ const Resources = () => {
             <li>• Childcare subsidies</li>
             <li>• Credit counseling services</li>
           </ul>
+        </div>
+
+        {/* Medical & Health Support (Your Link Added Here) */}
+        <div className="bg-white p-6 rounded-lg shadow-md mb-8 mt-8">
+          <h2 className="text-2xl font-bold text-purple-700 mb-4">Medical & Health Support</h2>
+          <p className="text-gray-600 mb-4">
+            If you have experienced any form of medical harm, sexual violence, or need health-related assistance,
+            you can access confidential help and support through trusted online services.
+          </p>
+
+          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <p className="font-semibold text-gray-800 mb-2">Need health assistance or recovery support?</p>
+            <p className="text-gray-700 mb-3">
+              Access free guidance, support resources, and recovery information through the Health Link platform.
+            </p>
+            <a
+              href="https://final-frontend-psi.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-purple-700 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-800 transition"
+            >
+              Visit Health Link Support
+            </a>
+          </div>
         </div>
       </div>
     </div>
