@@ -98,12 +98,30 @@ const Resources = () => {
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
           <h2 className="text-2xl font-bold text-purple-700 mb-4">Digital Safety Tips</h2>
           <ul className="space-y-3 text-gray-700">
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Use devices your abuser doesn't have access to when seeking help</span></li>
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Clear your browser history and use incognito/private mode</span></li>
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Change passwords on accounts your abuser may access</span></li>
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Check privacy settings on social media</span></li>
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Be aware of location tracking on your phone and apps</span></li>
-            <li className="flex items-start"><span className="text-purple-600 mr-2">✓</span>Get a new phone number if needed</span></li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Use devices your abuser doesn't have access to when seeking help
+            </li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Clear your browser history and use incognito/private mode
+            </li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Change passwords on accounts your abuser may access
+            </li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Check privacy settings on social media
+            </li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Be aware of location tracking on your phone and apps
+            </li>
+            <li className="flex items-start">
+              <span className="text-purple-600 mr-2">✓</span>
+              Get a new phone number if needed
+            </li>
           </ul>
         </div>
 
@@ -123,7 +141,7 @@ const Resources = () => {
           </ul>
         </div>
 
-        {/* Medical & Health Support (Your Link Added Here) */}
+        {/* Medical & Health Support */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-8 mt-8">
           <h2 className="text-2xl font-bold text-purple-700 mb-4">Medical & Health Support</h2>
           <p className="text-gray-600 mb-4">
@@ -146,6 +164,7 @@ const Resources = () => {
             </a>
           </div>
         </div>
+
       </div>
     </div>
   );
