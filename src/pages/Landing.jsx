@@ -85,7 +85,7 @@ const Landing = () => {
             Forms of Gender-Based Violence
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
-            {/* Physical Abuse with Image */}
+            {/* Physical Abuse */}
             <div className="bg-white dark:bg-gray-700 p-4 rounded shadow flex flex-col items-center">
               <img src={physicalImg} alt="Physical abuse" className="w-35 h-24 mb-2 rounded" />
               <h4 className="font-bold text-purple-700 mb-1">Physical</h4>
@@ -102,7 +102,7 @@ const Landing = () => {
               </p>
             </div>
 
-            {/* Sexual Abuse with Image */}
+            {/* Sexual Abuse */}
             <div className="bg-white dark:bg-gray-700 p-4 rounded shadow flex flex-col items-center">
               <img src={sexualImg} alt="Sexual abuse" className="w-60 h-24 mb-2 rounded" />
               <h4 className="font-bold text-purple-700 mb-1">Sexual</h4>
@@ -141,6 +141,15 @@ const Landing = () => {
         <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-12">
           <h2 className="text-2xl font-bold mb-4">Helpful Resources</h2>
           <ul className="list-disc list-inside space-y-2 text-blue-700 dark:text-blue-400">
+            <li>
+              <a
+                href="https://your-medical-gbv-link.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GBV Medical Support
+              </a> – Consultation, referral, and treatment for survivors of gender-based violence. Affiliated with 2KO Safe Haven.
+            </li>
             <li>
               <a href="http://www.youtube.com/@MathiasMwaro" target="_blank" rel="noopener noreferrer">
                 MathiasMwaro (Next TechStack) YouTube Channel
