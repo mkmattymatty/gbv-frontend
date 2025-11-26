@@ -143,7 +143,7 @@ const Landing = () => {
           <ul className="list-disc list-inside space-y-2 text-blue-700 dark:text-blue-400">
             <li>
               <a
-                href="https://your-medical-gbv-link.com"
+                href="https://final-frontend-psi.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
