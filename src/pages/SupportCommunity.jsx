@@ -150,80 +150,80 @@ const SupportCommunity = () => {
               <div className="text-sm text-gray-500">No comments yet — be the first.</div>
             )}
 
-            {comments.map((c) => (
-              <motion.div
-                key={c._id}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.18 }}
-                className={`p-3 rounded ${
-                  c.username === user?.username
-                    ? "bg-purple-100 dark:bg-purple-800"
-                    : "bg-gray-50 dark:bg-gray-700"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <div className="text-sm font-semibold text-purple-700 dark:text-purple-300">
-                    {c.username || "Anonymous"}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="text-xs text-gray-400">
-                      {new Date(c.createdAt).toLocaleString()}
+            {[...comments]
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((c) => (
+                <motion.div
+                  key={c._id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.18 }}
+                  className={`p-3 rounded ${
+                    c.username === user?.username
+                      ? "bg-purple-100 dark:bg-purple-800"
+                      : "bg-gray-50 dark:bg-gray-700"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="text-sm font-semibold text-purple-700 dark:text-purple-300">
+                      {c.username || "Anonymous"}
                     </div>
+                    <div className="flex items-center gap-2">
+                      <div className="text-xs text-gray-400">
+                        {new Date(c.createdAt).toLocaleString()}
+                      </div>
 
-                    {c.username === user?.username && (
-                      <>
-                        {/* Edit button */}
-                        <button
-                          onClick={() => {
-                            setEditingId(c._id);
-                            setEditingText(c.text);
-                          }}
-                          className="text-blue-600 text-xs hover:underline"
-                        >
-                          Edit
-                        </button>
+                      {c.username === user?.username && (
+                        <>
+                          <button
+                            onClick={() => {
+                              setEditingId(c._id);
+                              setEditingText(c.text);
+                            }}
+                            className="text-blue-600 text-xs hover:underline"
+                          >
+                            Edit
+                          </button>
 
-                        {/* Delete button */}
-                        <button
-                          onClick={() => handleDelete(c._id)}
-                          className="text-red-600 text-xs hover:underline"
-                        >
-                          Delete
-                        </button>
-                      </>
-                    )}
+                          <button
+                            onClick={() => handleDelete(c._id)}
+                            className="text-red-600 text-xs hover:underline"
+                          >
+                            Delete
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {editingId === c._id ? (
-                  <div className="flex gap-2 mt-1">
-                    <input
-                      type="text"
-                      value={editingText}
-                      onChange={(e) => setEditingText(e.target.value)}
-                      className="flex-1 p-2 border rounded"
-                    />
-                    <button
-                      onClick={() => handleEdit(c._id)}
-                      className="bg-blue-600 text-white px-2 rounded"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={() => setEditingId(null)}
-                      className="bg-gray-400 text-white px-2 rounded"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                ) : (
-                  <div className="text-gray-800 dark:text-gray-100 whitespace-pre-wrap mt-1">
-                    {c.text}
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  {editingId === c._id ? (
+                    <div className="flex gap-2 mt-1">
+                      <input
+                        type="text"
+                        value={editingText}
+                        onChange={(e) => setEditingText(e.target.value)}
+                        className="flex-1 p-2 border rounded"
+                      />
+                      <button
+                        onClick={() => handleEdit(c._id)}
+                        className="bg-blue-600 text-white px-2 rounded"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditingId(null)}
+                        className="bg-gray-400 text-white px-2 rounded"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="text-gray-800 dark:text-gray-100 whitespace-pre-wrap mt-1">
+                      {c.text}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
 
             <div ref={messagesEndRef} />
           </div>
